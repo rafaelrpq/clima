@@ -41,7 +41,7 @@ async function obterDados () {
     let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${local.lat}&lon=${local.lon}`
 
     try {
-        let req = await fetch (url)
+        let req = await fetch (url, { mode : 'cors'} )
         let dados = await req.json ()
         return dados;
     } catch (e) {
@@ -69,8 +69,6 @@ obterDados ().then ((req) => {
     let code =  clima.data.next_1_hours.summary.symbol_code
 
     document.body.style.backgroundImage = `url(https://api.met.no/images/weathericons/svg/${code}.svg)`
-    document.body.style.backgroundRepeat = `no-repeat`
-    document.body.style.backgroundPosition = `center`
 
     header.innerHTML = ' Dados referentes a '+new Date (clima.time).toLocaleString ()+'<br>'
     for (i in units) {
