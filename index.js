@@ -1,6 +1,7 @@
 let local = {
     lat : 0,
-    lon : 0
+    lon : 0,
+    alt : 0,
 }
 
 const options = {
@@ -38,6 +39,7 @@ function tratarErro (erro) {
 function obterLocalizacao (pos) {
     local.lat = pos.coords.latitude
     local.lon = pos.coords.longitude
+    local.alt = pos.coords.altitude
 }
 
 async function obterDados () {
@@ -71,7 +73,8 @@ let button = document.querySelector ('header button')
 button.onclick = () => {
     alert (
         'lat: '+local.lat+'\n'+
-        'lon: '+local.lon
+        'lon: '+local.lon+'\n'+
+        'alt: '+local.alt
     )
 }
 obterDados ().then ((req) => {
