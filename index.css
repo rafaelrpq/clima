@@ -29,6 +29,7 @@ header {
 }
 
 main {
+    position:relative;
     width: 100%;
     height: calc(100% - 7rem);
     padding: .5rem;
