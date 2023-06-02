@@ -3,7 +3,6 @@ var urlsToCache = [
   './',
   './index.html',
   './index.css',
-  './manifest.json',
   './res/clima128.png',
 ];
 
