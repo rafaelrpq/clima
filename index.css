@@ -33,6 +33,7 @@ main {
     width: 100%;
     height: calc(100% - 7rem);
     padding: .5rem;
+    overflow: hidden;
 }
 
 footer {
