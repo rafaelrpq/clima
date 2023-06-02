@@ -12,8 +12,10 @@ body {
     background-color: #aaa;
     font-family : 'arial', 'sans serif';
     font-size: 1.8rem;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    /*border: 1px solid #0f0;*/
 }
 
 header {
@@ -30,8 +32,8 @@ header {
 main {
     position:relative;
     width: 100%;
-    height: calc(100% - 7rem);
-    border: 1px solid #f00;
+    height: -webkit-fill-available;
+    /*border: 1px solid #f00;*/
     padding: .5rem;
     overflow: hidden;
 }
