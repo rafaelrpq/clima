@@ -121,7 +121,7 @@ setTimeout (()=> {
         let atualizado = dados.properties.meta.updated_at;
         footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
     })
-}, 1000)
+}, 100)
 
 if ('serviceWorker' in navigator) {
     window.addEventListener ('load', () => {
