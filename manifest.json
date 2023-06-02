@@ -11,11 +11,6 @@
         "type": "image/png",
         "purpose": "maskable"
     },{
-        "src": "./res/clima256.png",
-        "sizes": "256x256",
-        "type": "image/png",
-        "purpose": "any"
-    },{
         "src": "./res/clima512.png",
         "sizes": "512x512",
         "type": "image/png"

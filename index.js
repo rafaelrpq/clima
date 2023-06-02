@@ -41,7 +41,7 @@ async function obterDados () {
     let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${local.lat}&lon=${local.lon}`
 
     try {
-        let req = await fetch (url, {mode : 'no-cors'})
+        let req = await fetch (url)
         let dados = await req.json ()
         return dados;
     } catch (e) {
