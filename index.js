@@ -3,6 +3,12 @@ let local = {
     lon : 0
 }
 
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+}
+
 const Meteo = {
     'air_pressure_at_sea_level' : 'Pressão Atmosférica',
     'air_temperature'           : 'Temperatura',
@@ -36,7 +42,7 @@ function obterLocalizacao (pos) {
 
 async function obterDados () {
 
-    navigator.geolocation.getCurrentPosition( obterLocalizacao, tratarErro)
+    navigator.geolocation.getCurrentPosition( obterLocalizacao, tratarErro, options)
 
     let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${local.lat}&lon=${local.lon}`
 
@@ -52,12 +58,22 @@ async function obterDados () {
 
 let dados = {}
 
-let header = document.querySelector ('header')
+let header = document.querySelector ('header span')
 let main = document.querySelector ('main')
 let footer = document.querySelector ('footer')
 
 let table = document.querySelector ('main table')
 
+let button = document.querySelector ('header button')
+
+
+
+button.onclick = () => {
+    alert (
+        'lat: '+local.lat+'\n'+
+        'lon: '+local.lon
+    )
+}
 obterDados ().then ((req) => {
     dados = req;
     if (dados === null) {
