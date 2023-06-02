@@ -1,4 +1,4 @@
-var CACHE_NAME = 'notas-cache';
+var CACHE_NAME = 'clima-cache';
 var urlsToCache = [
   './',
   './index.html',
@@ -18,3 +18,10 @@ self.addEventListener('install', function(event) {
         })
     );
 });
+
+self.addEventListener ('fetch', (event) => {
+    event.respondWith (
+        caches.match (event.request)
+        .then (cacheResponse => (cacheResponse || fetch (event).request))
+    )
+})
