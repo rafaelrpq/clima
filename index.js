@@ -1,4 +1,4 @@
-let local = {
+var geo = {
     lat : 0,
     lon : 0,
     alt : 0,
@@ -6,9 +6,11 @@ let local = {
 
 const options = {
   enableHighAccuracy: true,
-  timeout: 5000,
+  timeout: 1000,
   maximumAge: 0,
 }
+
+let url = '--';
 
 const Meteo = {
     'air_pressure_at_sea_level' : 'Pressão Atmosférica',
@@ -20,7 +22,7 @@ const Meteo = {
     'wind_speed'                : 'Velocidade do vento',
 }
 
-function tratarErro (erro) {
+async function tratarErro (erro) {
     let msg = 'erro desconhecido'
     switch (erro.code) {
         case 1 :
@@ -34,28 +36,38 @@ function tratarErro (erro) {
             break;
     }
     console.log (msg)
+    return ;
 }
 
-function obterLocalizacao (pos) {
-    local.lat = pos.coords.latitude
-    local.lon = pos.coords.longitude
-    local.alt = pos.coords.altitude
-}
-
-async function obterDados () {
-
-    navigator.geolocation.getCurrentPosition( obterLocalizacao, tratarErro, options)
-
-    let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${local.lat}&lon=${local.lon}`
-
+async function obterLocalizacao (pos) {
     try {
-        let req = await fetch (url, { mode : 'cors'} )
+        geo.lat = await pos.coords.latitude
+        geo.lon = await pos.coords.longitude
+        geo.alt = await pos.coords.altitude
+
+        console.log (geo)
+
+        url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${geo.lat}&lon=${geo.lon}&altitude=${geo.alt ?? 0}`
+
+    } catch (e) {
+        console.log (e)
+    }
+
+}
+
+
+
+navigator.geolocation.getCurrentPosition (obterLocalizacao, tratarErro, options)
+async function obterDados () {
+    try {
+        let req = await fetch (url)
         let dados = await req.json ()
         return dados;
     } catch (e) {
-        console.log ('erro => ', e)
+        console.log (e)
+        console.log (url)
+        return null;
     }
-    return null
 }
 
 let dados = {}
@@ -72,52 +84,55 @@ let button = document.querySelector ('header button')
 
 button.onclick = () => {
     alert (
-        'lat: '+local.lat+'\n'+
-        'lon: '+local.lon+'\n'+
-        'alt: '+local.alt
+        'lat: '+geo.lat+'\n'+
+        'lon: '+geo.lon+'\n'+
+        'alt: '+geo.alt
     )
 }
-obterDados ().then ((req) => {
-    dados = req;
-    if (dados === null) {
-        return;
-    }
 
-    let units = dados.properties.meta.units
-    let clima = dados.properties.timeseries[0]
-    let code =  clima.data.next_1_hours.summary.symbol_code
 
-    document.body.style.backgroundImage = `url(https://api.met.no/images/weathericons/svg/${code}.svg)`
+setTimeout (()=> {
+    obterDados ().then ((req) => {
+        dados = req;
+        if (dados === null) {
+            return;
+        }
 
-    header.innerHTML = ' Dados referentes a '+new Date (clima.time).toLocaleString ()+'<br>'
-    for (i in units) {
-        let tr = document.createElement ('tr')
-        let data = document.createElement ('td')
-        let value = document.createElement ('td')
+        let units = dados.properties.meta.units
+        let clima = dados.properties.timeseries[0]
+        let code =  clima.data.next_1_hours.summary.symbol_code
 
-        tr.appendChild (data)
-        tr.appendChild (value)
-        data.innerHTML = Meteo[i]
-        value.innerHTML = (clima.data.instant.details[i] ?? '0') + units[i]
+        document.body.style.backgroundImage = `url(https://api.met.no/images/weathericons/svg/${code}.svg)`
 
-        table.appendChild (tr)
-    }
+        header.innerHTML = ' Dados referentes a '+new Date (clima.time).toLocaleString ()+'<br>'
+        for (i in units) {
+            let tr = document.createElement ('tr')
+            let data = document.createElement ('td')
+            let value = document.createElement ('td')
 
-    let atualizado = dados.properties.meta.updated_at;
-    footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
-})
+            tr.appendChild (data)
+            tr.appendChild (value)
+            data.innerHTML = Meteo[i]
+            value.innerHTML = (clima.data.instant.details[i] ?? '0') + units[i]
 
+            table.appendChild (tr)
+        }
+
+        let atualizado = dados.properties.meta.updated_at;
+        footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
+    })
+}, 1000)
 
 if ('serviceWorker' in navigator) {
     window.addEventListener ('load', () => {
         navigator.serviceWorker.register ('sw.js')
         .then (reg => {
-            console.log ('registrado!')
-            console.log (reg)
+            // console.log ('registrado!')
+            // console.log (reg)
         })
         .catch (err => {
-            console.log ('falha ao registrar')
-            console.log (err)
+            // console.log ('falha ao registrar')
+            // console.log (err)
         })
     })
 }
