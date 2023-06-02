@@ -1,0 +1,40 @@
+{
+    "name": "Dados climáticos",
+    "short_name": "Clima",
+    "icons": [{
+        "src": "./res/clima128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+    },{
+        "src": "./res/clima192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+    },{
+        "src": "./res/clima256.png",
+        "sizes": "256x256",
+        "type": "image/png",
+        "purpose": "any"
+    },{
+        "src": "./res/clima512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }],
+    "id": "./clima",
+    "scope": "./",
+    "start_url": "./",
+    "description": "Dados climáticos",
+    "background_color": "#539",
+    "theme_color": "#539",
+    "display": "fullscreen",
+    "lang": "pt",
+    "dir": "ltr",
+    "orientation": "any",
+    "display_override": [
+        "fullscreen",
+        "standalone"
+    ],
+    "categories": [
+        "utilities"
+    ]
+}

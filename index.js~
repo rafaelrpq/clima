@@ -1,3 +1,23 @@
+/*
+    async function clima () {
+        let id = 5791
+        let token = '4f4a74328b8c62fb732e4bef99fc5702'
+
+        //let url =`http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=Alegrete&state=RS&token=${token}`
+        let url = `http://apiadvisor.climatempo.com.br/api/v1/weather/locale/${id}/current?token=${token}`
+        //let url = `http://apiadvisor.climatempo.com.br/api/v1/forecast/region/sul?token=${token}`
+
+        try {
+            let req = await fetch (url)
+            let dados = await req.text ()
+            console.log (dados)
+        } catch (e) {
+            console.log ('erro =>',e)
+            console.log ('url =>', url)
+        }
+    }
+*/
+
 let local = {
     lat : 0,
     lon : 0
@@ -91,17 +111,4 @@ obterDados ().then ((req) => {
 })
 
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener ('load', () => {
-        navigator.serviceWorker.register ('sw.js')
-        .then (reg => {
-            console.log ('registrado!')
-            console.log (reg)
-        })
-        .catch (err => {
-            console.log ('falha ao registrar')
-            console.log (err)
-        })
-    })
-}
 
