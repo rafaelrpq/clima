@@ -5,9 +5,9 @@
         <meta charset="utf-8">
         <title>Clima</title>
         <style>
-            @import 'index.css'
+            @import 'clima.css'
         </style>
-        <script src="index.js" defer></script>
+        <script src="clima.js" defer></script>
     </head>
     <body>
         <header>
