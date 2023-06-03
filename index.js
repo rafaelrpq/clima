@@ -37,7 +37,8 @@ async function tratarErro (erro) {
             msg = 'Timeout'
             break;
     }
-    console.log (msg)
+    // console.log (msg)
+    alert (msg)
 }
 
 async function obterLocalizacao (pos) {
@@ -49,7 +50,8 @@ async function obterLocalizacao (pos) {
         url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${geo.lat}&lon=${geo.lon}&altitude=${geo.alt ?? 0}`
 
     } catch (e) {
-        console.log (e)
+        // console.log (e)
+        alert (e)
     }
 
 }
@@ -62,8 +64,9 @@ async function obterDados () {
         let dados = await req.json ()
         return dados;
     } catch (e) {
-        console.log (e)
-        console.log (url)
+        // console.log (e)
+        // console.log (url)
+        alert (e)
         return null;
     }
 }
@@ -119,7 +122,7 @@ setTimeout (()=> {
         let atualizado = dados.properties.meta.updated_at;
         footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
     })
-}, 100)
+}, 500)
 
 if ('serviceWorker' in navigator) {
     window.addEventListener ('load', () => {
