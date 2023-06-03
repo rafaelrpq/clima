@@ -46,8 +46,6 @@ async function obterLocalizacao (pos) {
         geo.lon = await pos.coords.longitude
         geo.alt = await pos.coords.altitude
 
-        console.log (geo)
-
         url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${geo.lat}&lon=${geo.lon}&altitude=${geo.alt ?? 0}`
 
     } catch (e) {
