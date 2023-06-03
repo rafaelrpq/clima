@@ -10,7 +10,7 @@ const options = {
   maximumAge: 0,
 }
 
-const timeout = navigator.userAgentData.mobile ? nul : 200;
+var timeout = navigator.userAgentData.mobile ? 10 : 200;
 
 let url = '--';
 
