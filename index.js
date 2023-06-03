@@ -37,8 +37,7 @@ async function tratarErro (erro) {
             msg = 'Timeout'
             break;
     }
-    // console.log (msg)
-    alert (msg)
+    console.log (msg)
 }
 
 async function obterLocalizacao (pos) {
@@ -47,11 +46,12 @@ async function obterLocalizacao (pos) {
         geo.lon = await pos.coords.longitude
         geo.alt = await pos.coords.altitude
 
-        url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${geo.lat}&lon=${geo.lon}&altitude=${geo.alt.toFixed (6) ?? 0}`
+        // url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${geo.lat}&lon=${geo.lon}&altitude=${geo.alt ?? 0}`
+        url = `https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat=${geo.lat}&lon=${geo.lon}`
 
     } catch (e) {
         // console.log (e)
-        // alert ('obter localização => ',e)
+        alert (e)
     }
 
 }
@@ -66,7 +66,7 @@ async function obterDados () {
     } catch (e) {
         // console.log (e)
         // console.log (url)
-        alert ('obter dados => '+e+'\n'+url)
+        alert (e)
         return null;
     }
 }
@@ -122,7 +122,7 @@ setTimeout (()=> {
         let atualizado = dados.properties.meta.updated_at;
         footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
     })
-}, 500)
+}, 1000)
 
 if ('serviceWorker' in navigator) {
     window.addEventListener ('load', () => {
