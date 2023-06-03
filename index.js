@@ -10,6 +10,8 @@ const options = {
   maximumAge: 0,
 }
 
+const timeout = navigator.userAgentData.mobile ? 20 : 200;
+
 let url = '--';
 
 const Meteo = {
@@ -36,7 +38,6 @@ async function tratarErro (erro) {
             break;
     }
     console.log (msg)
-    return ;
 }
 
 async function obterLocalizacao (pos) {
@@ -55,9 +56,8 @@ async function obterLocalizacao (pos) {
 
 }
 
-
-
 navigator.geolocation.getCurrentPosition (obterLocalizacao, tratarErro, options)
+
 async function obterDados () {
     try {
         let req = await fetch (url)
@@ -121,7 +121,7 @@ setTimeout (()=> {
         let atualizado = dados.properties.meta.updated_at;
         footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
     })
-}, 100)
+}, timeout)
 
 if ('serviceWorker' in navigator) {
     window.addEventListener ('load', () => {
