@@ -51,7 +51,7 @@ async function obterLocalizacao (pos) {
 
     } catch (e) {
         // console.log (e)
-        alert ('obter localização => ',e)
+        // alert ('obter localização => ',e)
     }
 
 }
