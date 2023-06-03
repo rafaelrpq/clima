@@ -10,7 +10,7 @@ const options = {
   maximumAge: 0,
 }
 
-var timeout = navigator.userAgentData.mobile ? 20 : 200;
+// var timeout = navigator.userAgentData.mobile ? 20 : 200;
 
 let url = '--';
 
@@ -119,7 +119,7 @@ setTimeout (()=> {
         let atualizado = dados.properties.meta.updated_at;
         footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
     })
-}, timeout)
+}, 200)
 
 if ('serviceWorker' in navigator) {
     window.addEventListener ('load', () => {
