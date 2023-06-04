@@ -79,17 +79,17 @@ let footer = document.querySelector ('footer')
 
 let table = document.querySelector ('main table')
 
-let button = document.querySelector ('header button')
+// let button = document.querySelector ('header button')
 
 
 
-button.onclick = () => {
-    alert (
-        'lat: '+geo.lat+'\n'+
-        'lon: '+geo.lon+'\n'+
-        'alt: '+geo.alt
-    )
-}
+// button.onclick = () => {
+//     alert (
+//         'lat: '+geo.lat+'\n'+
+//         'lon: '+geo.lon+'\n'+
+//         'alt: '+geo.alt
+//     )
+// }
 
 
 setTimeout (()=> {

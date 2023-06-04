@@ -41,7 +41,7 @@ self.addEventListener('install', function(event) {
                 const responseToCache = response.clone();
                 const cache = await caches.open(CACHE_NAME)
                 await cache.put(event.request, response.clone());
-                // await cache.addAll(urlsToCache);
+                await cache.addAll(urlsToCache);
             }
 
         return response;
