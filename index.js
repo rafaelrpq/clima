@@ -103,7 +103,7 @@ setTimeout (()=> {
         let clima = dados.properties.timeseries[0]
         let code =  clima.data.next_1_hours.summary.symbol_code
 
-        document.body.style.backgroundImage = `url(https://api.met.no/images/weathericons/svg/${code}.svg)`
+        main.style.backgroundImage = `url(https://api.met.no/images/weathericons/svg/${code}.svg)`
 
         header.innerHTML = ' Dados referentes a '+new Date (clima.time).toLocaleString ()+'<br>'
         for (i in units) {

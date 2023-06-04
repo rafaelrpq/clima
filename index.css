@@ -10,9 +10,6 @@ html {
 body {
     margin: 0;
     background-color: #aaa;
-    background-image: url();
-    background-repeat: no-repeat;
-    background-position: right center;
     font-family : 'arial', 'sans serif';
     font-size: 1.8rem;
     height: 100vh;
@@ -40,6 +37,9 @@ main {
     width: 100%;
     height: inherit;
     /*border: 1px solid #f00;*/
+    background-image: url('#');
+    background-repeat: no-repeat;
+    background-position: right center;
     padding: .5rem;
     overflow: hidden;
     font-size: 1.6rem;

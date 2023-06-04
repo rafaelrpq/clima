@@ -21,12 +21,11 @@
     "description": "Dados climáticos",
     "background_color": "#539",
     "theme_color": "#539",
-    "display": "fullscreen",
+    "display": "standalone",
     "lang": "pt",
     "dir": "ltr",
     "orientation": "any",
     "display_override": [
-        "fullscreen",
         "standalone"
     ],
     "categories": [
