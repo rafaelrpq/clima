@@ -24,25 +24,27 @@ self.addEventListener('install', function(event) {
 //         .then (cacheResponse => (cacheResponse || fetch (event).request))
 //     )
 
-    event.respondWith((async () => {
-      const cachedResponse = await caches.match(event.request);
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+    event.respondWith ((
+        async () => {
+            const cachedResponse = await caches.match(event.request);
+            if (cachedResponse) {
+                return cachedResponse;
+            }
 
-      const response = await fetch(event.request);
+            const response = await fetch(event.request);
 
-      if (!response || response.status !== 200 || response.type !== 'basic') {
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+                return response;
+            }
+
+            if (urlsToCache) {
+                const responseToCache = response.clone();
+                const cache = await caches.open(CACHE_NAME)
+                await cache.put(event.request, response.clone());
+                await cache.addAll(urlsToCache);
+            }
+
         return response;
-      }
-
-      if (true) {
-        const responseToCache = response.clone();
-        const cache = await caches.open(CACHE_NAME)
-        await cache.put(event.request, response.clone());
-      }
-
-      return response;
-    })());
+    }) ());
 
 })
