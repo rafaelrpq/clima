@@ -77,7 +77,7 @@ let header = document.querySelector ('header span')
 let main = document.querySelector ('main')
 let footer = document.querySelector ('footer')
 
-let table = document.querySelector ('main table')
+let table = document.createElement ('table')
 
 // let button = document.querySelector ('header button')
 
@@ -119,6 +119,8 @@ setTimeout (()=> {
             table.appendChild (tr)
         }
 
+        main.innerHTML = '';
+        main.appendChild (table)
         let atualizado = dados.properties.meta.updated_at;
         footer.innerHTML = `Atualizado ${new Date(atualizado).toLocaleString ()}`
     })

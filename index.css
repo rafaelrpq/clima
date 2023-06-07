@@ -64,3 +64,32 @@ header button {
     display: flex;
     align-items: center;
 }
+
+.loading {
+    width: 24rem;
+    height:2.2rem;
+    border-radius: 40px;
+    color:#539 ;
+    border:2px solid;
+    background: rgba(255,255,255,0.2);
+    position: relative;
+    top: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading::before {
+    content:"";
+    position: absolute;
+    margin:2px;
+    width:30%;
+    top:0;
+    bottom:0;
+    left:0;
+    border-radius: inherit;
+    background:currentColor;
+    animation:loop 1s infinite linear;
+}
+@keyframes loop {
+    50% {left:100%;transform: translateX(calc(-100% - 4px))}
+}
