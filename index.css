@@ -73,9 +73,9 @@ header button {
     border:2px solid;
     background: rgba(255,255,255,0.2);
     position: relative;
-    top: 50%;
-    margin-left: auto;
-    margin-right: auto;
+
+    top: calc(50% - 1.1rem);
+    margin: auto;
 }
 
 .loading::before {
